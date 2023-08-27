@@ -36,31 +36,34 @@ public class MovieRepository {
         return dbD.get(name);
     }
 
-    private final List<String> MovieListByDirector = new ArrayList<>();
-    public ArrayList<String> getMoviesByDirectorName(String directorName) {
-        for(Map.Entry<String, String> entry : dbMD.entrySet()) {
-            // if give value is equal to value from entry
-            // print the corresponding key
-            if (Objects.equals(entry.getValue(), directorName)) {
-                MovieListByDirector.add(entry.getKey());
+    public List<String> getMoviesByDirectorName(String name) {
+        List<String>movies=new ArrayList<>();
+        for(String movie: dbMD.keySet()){
+            if(dbMD.get(movie).equals(name)){
+                movies.add(movie);
             }
         }
-        return (ArrayList<String>) MovieListByDirector;
+        return movies;
     }
 
-    private final List<String> MoviesList = new ArrayList<>();
-    public ArrayList<String> findAllMovies() {
-        for(Map.Entry<String, Movie> entry : dbM.entrySet()) {
-            MoviesList.add(entry.getKey());
+    public List<String> findAllMovies() {
+        List<String>movies = new ArrayList<>();
+        for(String name: dbM.keySet()){
+            movies.add(name);
         }
-        return (ArrayList<String>) MoviesList;
+        return movies;
     }
 
-    public void deleteDirectorByName(String directorName) {
-        dbMD.remove(directorName);
-        return;
+    public void deleteDirectorByName(String name) {
+        if(dbD.containsKey(name)){
+            dbD.remove((name));
+        }
+        for(String movie:dbMD.keySet()){
+            if(dbMD.get(movie).equals(name)){
+                dbM.remove(movie);
+            }
+        }
     }
-
     public void deleteAllDirectors() {
         for(String name:dbD.keySet()){
             for(String movie:dbMD.keySet()){
