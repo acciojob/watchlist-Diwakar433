@@ -2,8 +2,9 @@ package com.driver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 public class MovieService {
@@ -11,17 +12,18 @@ public class MovieService {
     MovieRepository movieRepository;
     public String addMovie(Movie movie) {
         movieRepository.addMovie(movie);
-        return "success message wrapped in a ResponseEntity object";
+        return "movie added successfully";
     }
+
 
     public String addDirector(Director director) {
         movieRepository.addDirector(director);
-        return "success message wrapped in a ResponseEntity object";
+        return "director added successfully";
     }
 
-    public String addMovieDirectorPair(String movieName, String directorName) {
-        movieRepository.addMovieDirectorPair(movieName, directorName);
-        return "success message wrapped in a ResponseEntity object";
+    public String  addMovieDirectorPair(String movie, String director) {
+        movieRepository.addMovieDirectorPair(movie,director);
+        return "movie director paired successfully";
     }
 
     public Movie getMovieByName(String name) {
@@ -32,21 +34,22 @@ public class MovieService {
         return movieRepository.getDirectorByName(name);
     }
 
-    public List<String> getMoviesByDirectorName(String directorName) {
-        return movieRepository.getMoviesByDirectorName(directorName);
+
+    public List<String> getMoviesByDirectorName(String name) {
+        return movieRepository.getMoviesByDirectorName(name);
     }
 
     public List<String> findAllMovies() {
         return movieRepository.findAllMovies();
     }
 
-    public String deleteDirectorByName(String directorName) {
-        movieRepository.deleteDirectorByName(directorName);
-        return "success message wrapped in a ResponseEntity object";
+    public String deleteDirectorByName(String name) {
+        movieRepository.deleteDirectorByName(name);
+        return "director deleted successfully";
     }
 
     public String deleteAllDirectors() {
         movieRepository.deleteAllDirectors();
-        return "success message wrapped in a ResponseEntity object";
+        return "all directors deleted successfully";
     }
 }
