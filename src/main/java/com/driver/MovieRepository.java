@@ -47,11 +47,7 @@ public class MovieRepository {
     }
 
     public List<String> findAllMovies() {
-        List<String>movies = new ArrayList<>();
-        for(String name: dbM.keySet()){
-            movies.add(name);
-        }
-        return movies;
+        return new ArrayList<>(dbM.keySet());
     }
 
     public void deleteDirectorByName(String name) {
