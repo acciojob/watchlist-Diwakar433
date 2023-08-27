@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.security.Key;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Repository
 public class MovieRepository {
@@ -39,7 +36,7 @@ public class MovieRepository {
         return dbD.get(name);
     }
 
-    private final ArrayList<String> MovieListByDirector = new ArrayList<>();
+    private final List<String> MovieListByDirector = new ArrayList<>();
     public ArrayList<String> getMoviesByDirectorName(String directorName) {
         for(Map.Entry<String, String> entry : dbMD.entrySet()) {
             // if give value is equal to value from entry
@@ -48,15 +45,15 @@ public class MovieRepository {
                 MovieListByDirector.add(entry.getKey());
             }
         }
-        return MovieListByDirector;
+        return (ArrayList<String>) MovieListByDirector;
     }
 
-    private final ArrayList<String> MoviesList = new ArrayList<>();
+    private final List<String> MoviesList = new ArrayList<>();
     public ArrayList<String> findAllMovies() {
         for(Map.Entry<String, Movie> entry : dbM.entrySet()) {
             MoviesList.add(entry.getKey());
         }
-        return MoviesList;
+        return (ArrayList<String>) MoviesList;
     }
 
     public void deleteDirectorByName(String directorName) {
